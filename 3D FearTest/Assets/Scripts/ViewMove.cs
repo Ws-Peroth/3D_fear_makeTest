@@ -6,7 +6,7 @@ public class ViewMove : MonoBehaviour
 {
     public GameObject mainCamera;
     public float speed;
-
+    public GameObject flashLight;
     private void Start()
     {
         speed = -5f;
@@ -54,11 +54,25 @@ public class ViewMove : MonoBehaviour
             else
                 mainCamera.transform.rotation = Quaternion.Euler(-45.0f, mainCamera.transform.rotation.y, mainCamera.transform.rotation.y);
         }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
+
+    public void LightControl()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.SetActive(!flashLight.activeSelf);
+        }
+    }
+
     void Update()
     {
         Walk();
         Spin();
         ViewYChange();
+        LightControl();
     }
 }
