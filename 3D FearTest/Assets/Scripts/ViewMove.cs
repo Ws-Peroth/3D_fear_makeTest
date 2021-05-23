@@ -6,7 +6,8 @@ public class ViewMove : MonoBehaviour
 {
     public GameObject mainCamera;
     public float speed;
-    public GameObject flashLight;
+    public GameObject flashLightObject;
+    public Light flashLight;
     private void Start()
     {
         speed = -5f;
@@ -64,7 +65,15 @@ public class ViewMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            flashLight.SetActive(!flashLight.activeSelf);
+            flashLightObject.SetActive(!flashLightObject.activeSelf);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            flashLight.color = new Color32(255, 255, 255, 255);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            flashLight.color = new Color32(140, 120, 220, 255);
         }
     }
 
