@@ -5,12 +5,14 @@ using UnityEngine;
 public class ViewMove : MonoBehaviour
 {
     public GameObject mainCamera;
-    public float speed;
+    public float moveSpeed;
+    public float spinSpeed;
     public GameObject flashLightObject;
     public Light flashLight;
     private void Start()
     {
-        speed = -5f;
+        moveSpeed = 10f;
+        spinSpeed = 0.5f;
         gameObject.transform.rotation = Quaternion.identity;
         mainCamera.transform.rotation = Quaternion.identity;
     }
@@ -19,11 +21,11 @@ public class ViewMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.Translate(Vector3.forward  * speed * Time.deltaTime);
+            transform.Translate(Vector3.back  * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -31,11 +33,11 @@ public class ViewMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Rotate(0, -0.1f, 0);
+            transform.Rotate(0, -spinSpeed, 0);
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Rotate(0, 0.1f, 0);
+            transform.Rotate(0, spinSpeed, 0);
         }
     }
 
@@ -44,14 +46,14 @@ public class ViewMove : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             if (mainCamera.transform.rotation.x <= 45.0f)
-                mainCamera.transform.Rotate(0.1f, 0, 0);
+                mainCamera.transform.Rotate(spinSpeed, 0, 0);
             else
                 mainCamera.transform.rotation = Quaternion.Euler(45.0f, mainCamera.transform.rotation.y, mainCamera.transform.rotation.y);
         }
         if (Input.GetKey(KeyCode.W))
         {
             if (mainCamera.transform.rotation.x >= -45.0f)
-                mainCamera.transform.Rotate(-0.1f, 0, 0);
+                mainCamera.transform.Rotate(-spinSpeed, 0, 0);
             else
                 mainCamera.transform.rotation = Quaternion.Euler(-45.0f, mainCamera.transform.rotation.y, mainCamera.transform.rotation.y);
         }
